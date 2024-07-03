@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Decrypt and Display Text</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <script>
+        // 当文档加载完成后执行解密操作
+        document.addEventListener('DOMContentLoaded', function() {
+
+
+          console.log(CryptoJS.enc.Utf8.parse('cps:xiao:hu:ai:2024:0403'));
+            // var decryptedText = CryptoJS.AES.decrypt('LwWfDddRSDB7JQhzmvNhog==', 'cps:xiao:hu:ai:2024:0403').toString(CryptoJS.enc.Utf8);
+            var decryptedText = CryptoJS.AES.encrypt('abc', 'cps:xiao:hu:ai:2024:0403')
+            console.log(decryptedText);
+            var abc = CryptoJS.AES.decrypt(decryptedText, 'cps:xiao:hu:ai:2024:0403').toString(CryptoJS.enc.Utf8);
+            console.log(abc)
+            // document.getElementById('output').textContent = decryptedText;
+
+        });
+    </script>
+</head>
+<body>
+    <h1>解密后的文本：</h1>
+    <!-- 这里是一个用于显示解密文本的元素 -->
+    <p id="output"></p>
+</body>
+</html>
