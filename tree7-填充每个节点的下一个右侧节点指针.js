@@ -14,9 +14,7 @@
 var connect = function (root) {
   const pre = [];
   function dfs(node, depth) {
-      if (node === null) {
-          return;
-      }
+      if (node === null) return;
       if (depth === pre.length) { // node 是这一层最左边的节点
           pre.push(node);
           console.log(pre)
