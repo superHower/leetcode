@@ -46,8 +46,7 @@ var tenToBinary = (n) => {
   // 此时 arr            [1,0,0]
   //      arr.toString() 1,0,0
   return parseInt(arr.join('')) 
-
-
 }
+
 const n = 11 // 3
 console.log(hammingWeight(n))
