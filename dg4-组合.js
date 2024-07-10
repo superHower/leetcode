@@ -6,19 +6,21 @@
 */
 
 var combine = function(n, k) {
-  let res = []; // 存储结果的数组
-  const backtrack = (start, path) => {
+  let res = []; // 存储 总结果
+  let path = []; // 存储 数字
+
+  const backtrack = (start) => {
     if (path.length === k) {
-      res.push(path.slice());// 如果路径长度等于k，将其复制到结果数组
+      res.push([...path]); // 使用了扩展运算符 [...path] 来复制 path 数组
       return;
     }
     for (let i = start; i <= n; i++) {
-      path.push(i); // 将i加入路径
-      backtrack(i + 1, path); // 继续添加下一个数
-      path.pop(); // 回溯，移除i
+      path.push(i);
+      backtrack(i + 1); // 向下递归
+      path.pop();
     }
   };
-  backtrack(1, []);
+  backtrack(1);
   return res;
 };
 

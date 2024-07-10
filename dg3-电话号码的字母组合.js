@@ -8,23 +8,24 @@
  * 作者：代码随想录
  */
 var letterCombinations = function(digits) {
-  const k = digits.length;
+  const len = digits.length;
   const map = ["","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"];
-  if(!k) return [];
-  if(k === 1) return map[digits].split("");
+  if(!len) return [];
+  if(len === 1) return map[digits].split("");
 
-  const res = [], path = [];
-  backtracking(digits, k, 0);
+  const res = [], path = []; // 存储容器
+  backtracking(digits, 0);
   return res;
 
-  function backtracking(n, k, a) {
-      if(path.length === k) {
-          res.push(path.join(""));
+  function backtracking(digits, a) {
+      if(path.length === len) {
+        console.log(path)
+          res.push(path.join("")); // 把数组 粘在一块变成 字符串
           return;
       }
-      for(const v of map[n[a]]) {
+      for(const v of map[digits[a]]) { // 遍历这个
           path.push(v);
-          backtracking(n, k, a + 1);
+          backtracking(digits, a + 1);
           path.pop();
       }
   }
