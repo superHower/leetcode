@@ -14,10 +14,10 @@ var letterCombinations = function(digits) {
   if(len === 1) return map[digits].split("");
 
   const res = [], path = []; // 存储容器
-  backtracking(digits, 0);
+  backtracking(0);
   return res;
 
-  function backtracking(digits, a) {
+  function backtracking(a) { // 正在处理的digits的索引  也就是 数字
       if(path.length === len) {
         console.log(path)
           res.push(path.join("")); // 把数组 粘在一块变成 字符串
@@ -25,7 +25,7 @@ var letterCombinations = function(digits) {
       }
       for(const v of map[digits[a]]) { // 遍历这个
           path.push(v);
-          backtracking(digits, a + 1);
+          backtracking(a + 1);
           path.pop();
       }
   }
