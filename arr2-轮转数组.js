@@ -3,15 +3,13 @@
 
 给定一个整数数组 nums，将数组中的元素向右轮转 k 个位置，其中 k 是非负数。
 */
-/**
-/**
- * @param {number[]} nums
- * @param {number} k
- * @return {void} Do not return anything, modify nums in-place instead.
- */
+
+const nums = [1,2,3,4,5,6,7], k = 3
+// const nums = [-1,-100,3,99], k = 2
+console.log(rotate(nums, k)) // [5,6,7,1,2,3,4]
 
 // 思路一：数组splice法
-var rotate1 = function(nums, k) {
+function rotate1(nums, k) {
   const n = nums.length;
   // 分割数组
   let left = nums.splice(n-k,k);
@@ -21,7 +19,7 @@ var rotate1 = function(nums, k) {
 };
 
 // 思路二：数组地址法
-var rotate = function(nums, k) {
+function rotate(nums, k) {
   const n = nums.length;
   const newArr = new Array(n);
   for (let i = 0; i < n; ++i) {
@@ -32,16 +30,15 @@ var rotate = function(nums, k) {
   for (let i = 0; i < n; ++i) {
       nums[i] = newArr[i];
   }
+
+  return nums
 };
 
 
 
 
 
-const nums = [1,2,3,4,5,6,7], k = 3
-// const nums = [-1,-100,3,99], k = 2
-rotate(nums, k)
-console.log(nums) // [5,6,7,1,2,3,4]
+
 
 /*
 示例 1:

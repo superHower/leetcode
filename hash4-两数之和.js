@@ -11,6 +11,7 @@ var twoSum = function(nums, target) {
     let complement = target - nums[index]; // 计算补数
     if (numMap.has(complement)) { // 找到了补数，立刻返回
       // 如果补数在哈希表中，返回索引
+      console.log(numMap.get(complement))
       return [numMap.get(complement), index];
     } else {
       numMap.set(nums[index], index); // 将当前元素及其索引存入哈希表
