@@ -4,14 +4,22 @@
 请你设计并实现时间复杂度为 O(n) 的算法解决此问题。
 */
 
+// const nums = [100,4,200,1,3,2] //4
+const nums = [0,3,7,2,5,8,4,6,0,1]//9
+console.log(longestConsecutive(nums))
+
+
 /**
- * 0702-20:09 终于自己做出来啦，历经波折啊
+ * 排序 -> 放入set 
+ * 遍历：这么简单，你都不会做，别干程序员了
  */
 
-var longestConsecutive = function(nums) {
+function longestConsecutive(nums) {
 
   nums.sort((a, b)=> {return a-b})
   nums = [...new Set(nums)]
+
+  console.log(nums)
 
   if(nums.length == 1) return 1
 
@@ -37,7 +45,3 @@ var longestConsecutive = function(nums) {
   return max
 
 };
-
-// const nums = [100,4,200,1,3,2] //4
-const nums = [0,3,7,2,5,8,4,6,0,1]//9
-console.log(longestConsecutive(nums))

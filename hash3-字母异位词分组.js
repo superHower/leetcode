@@ -6,13 +6,22 @@
 
 */
 
-var groupAnagrams = function(strs) {
+const strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+console.log(groupAnagrams(strs)) // [ [ 'eat', 'tea', 'ate' ], [ 'tan', 'nat' ], [ 'bat' ] ]
+
+/**
+ * 遍历 -> (字符串转数组后sort再恢复成字符串) ->
+ *    map 有 此字符串，放进list
+ *    map 无 此字符串，新建list
+ *    更新map
+ */
+
+function groupAnagrams(strs) {
   const map = new Map()
   for (let str of strs) {
-    // 根据排序后的字符串作为key
-    let array = Array.from(str)
-    array.sort()
-    let key = array.toString()
+    let array = Array.from(str) // 利用from 将字符串转成，字符串数组
+    array.sort() // 排序
+    let key = array.toString() // 将字符串数组，恢复成字符串
 
     // 确定要放进哪个list中，没有就新建一个
     let list = map.get(key) ? map.get(key) : new Array()
@@ -21,11 +30,8 @@ var groupAnagrams = function(strs) {
     // 放进map中
     map.set(key, list);
   }
-  return Array.from(map.values())
+  console.log(map.values()) // 这个结果是个Iterator
+  return Array.from(map.values())  // 要转成数组
 
 };
 
-const strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
-// const  strs = [""]
-// const  strs = ["a"]
-console.log(groupAnagrams(strs))

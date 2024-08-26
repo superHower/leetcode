@@ -94,7 +94,7 @@ concurrencyMaxTask(tasks, 4); // 并发控制， 限制并发数量为4
 
 
 
-// 4. 用promise封装一个异步场景delay
+// 4. 异步封装delay
 function delay(ms) {
   return new Promise( (resolve, reject) => {
     if(ms <= 0)    reject(`延迟时间必须大于0，传入的值为：${ms}`);
@@ -130,3 +130,23 @@ async function awaitDelay(ms) {
 awaitDelay(1000)
 awaitDelay(-1000)
 
+// 5. 异步实现加法 
+function asyncAdd(a, b) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        const result = a + b;
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    }, 1000); // 假设加法操作需要1秒时间来完成
+  });
+}
+
+// 使用asyncAdd函数
+asyncAdd(5, 3).then(result => {
+  console.log('加法结果:', result); // 输出: 加法结果: 8
+}).catch(error => {
+  console.error('发生错误:', error);
+});
