@@ -8,34 +8,33 @@
 返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。
 
  */
-/**
- * @param {number[]} prices
- * @return {number}
- */
-
-var maxProfit = function (prices) {
-  const n = prices.length;
-  if (n <= 1) {
-    return 0;
-  }
-  
-  let minPrice = prices[0]; // 记录买入股票的最低价格
-  let maxProfit = 0; // 记录最大利润
-  
-  for (let i = 1; i < n; i++) {
-    minPrice = Math.min(minPrice, prices[i]);// 更新最低价格
-    const today = prices[i] - minPrice // 今日最大利润
-    console.log('今日最大利润', today)
-    maxProfit = Math.max(maxProfit, today);    // 并更新最大利润
-  }
-  
-  return maxProfit;
-}
-
 
 const prices = [7,1,5,3,6,4]
 // const prices = [7,6,4,3,1]
 console.log(maxProfit(prices)) // 5
+
+
+/**
+ * 子问题： 第i天的最大利润, 比较（前一天的最大利润，今天买入的直接利润）
+ *                    还要不停的更新历史最大利润
+ * 
+ */
+
+function maxProfit(prices) {
+  let n = prices.length;
+  if (n < 2) return 0;
+
+// let dp = new Array(n).fill(0)
+  let dp = Array.from({ length: n }, () => 0)
+  let max = 0; // 记录遍历过程中的最大利润
+  for (let i = 1; i < n; i++) {
+    const price = prices[i] - prices[i - 1] 
+    dp[i] = Math.max(dp[i - 1], price); // 比较（前一天的最大利润， 今天买入的直接利润）
+    max = Math.max(max, dp[i]); // 更新历史最大利润
+  }
+  return max;
+}
+
 
 /*
 

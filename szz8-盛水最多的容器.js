@@ -6,7 +6,16 @@
 返回容器可以储存的最大水量。
  */
 
-var maxArea = function(height) {
+const height = [1,8,6,2,5,4,8,3,7]
+// const height = height = [1,1]
+console.log(maxArea(height))
+
+/**
+ * 左右，往中间指
+ * 找下标之差 * 值之差 的最大
+ */
+
+function maxArea(height) {
   let n = height.length
   let i = 0, j = n-1
   let maxArea = 0;
@@ -23,8 +32,6 @@ var maxArea = function(height) {
 };
 
 
-const height = [1,8,6,2,5,4,8,3,7]
-// const height = height = [1,1]
-console.log(maxArea(height))
+
 
 

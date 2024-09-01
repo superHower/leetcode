@@ -5,12 +5,29 @@
 同时还满足 nums[i] + nums[j] + nums[k] == 0 。请
 你返回所有和为 0 且不重复的三元组。
 */
+const nums = [-1,0,1,2,-1,-4]
+console.log(threeSum(nums))
 
+/**
+ * 排序
+ * 遍历
+ *   左指针：当前索引+1，
+ *   右指针：末尾
+ *   while循环
+ *   sum = 当前位置 + 左指针 + 右指针
+ *   
+ *   1. sum = 0 放入数组
+ *      移动左右： 先移动指针到下一个，然后判断是否重复，重复继续移动
+ *   2. sum < 0 移动右指针
+ *   3. sum > 0 移动左指针
+ *   
+**/
 
-var threeSum = function(nums) {
+function threeSum(nums) {
   let n = nums.length, ans = []
-  if(nums == null || n < 3) return ans;
-  nums.sort((a, b) => a - b);
+  if(nums == null || n < 3) return ans
+  nums.sort((a, b) => a - b)
+
 
 
   for(let i = 0; i < n-2; i++) { // 依次遍历
@@ -33,5 +50,4 @@ var threeSum = function(nums) {
   return ans
 
 };
-const nums = [-1,0,1,2,-1,-4]
-console.log(threeSum(nums))
+

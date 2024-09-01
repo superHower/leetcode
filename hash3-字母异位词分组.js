@@ -6,14 +6,16 @@
 
 */
 
-const strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
-console.log(groupAnagrams(strs)) // [ [ 'eat', 'tea', 'ate' ], [ 'tan', 'nat' ], [ 'bat' ] ]
+const strs = ["eat", "tea", "tan", "ate", "nat", "bat"] // [ [ 'eat', 'tea', 'ate' ], [ 'tan', 'nat' ], [ 'bat' ] ]
+console.log(groupAnagrams(strs))
 
 /**
- * 遍历 -> (字符串转数组后sort再恢复成字符串) ->
- *    map 有 此字符串，放进list
- *    map 无 此字符串，新建list
- *    更新map
+ * map{特定字符传:对应的[]}
+ * 遍历 
+ *    当前字符串转数组 -> sort -> 恢复成字符串
+ *    map 有 此字符串，放进list[]
+ *    map 无 此字符串，新建list[]
+ *    更新map{此字符串：list[]}
  */
 
 function groupAnagrams(strs) {

@@ -14,12 +14,16 @@
 解释：函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。注意这五个元素可为任意顺序。
 你不需要考虑数组中超出新长度后面的元素。
 */
+
+// const nums = [3,2,2,3], val = 3
+const nums = [0,1,2,2,3,0,4,2], val = 2
+const res = removeElement(nums, val)
+console.log(res)
+
 /**
- * @param {number[]} nums
- * @param {number} val
- * @return {number}
+ * 
  */
-var removeElement1 = function(nums, val) {
+function removeElement1(nums, val) {
   // 思路1：map方法遍历 =》导致splice 方法改变数组的长度和索引，从而导致后续的迭代出现问题。
   nums.map((item, index) => {
     if(item === val) {
@@ -31,13 +35,8 @@ var removeElement1 = function(nums, val) {
   })
   return nums.length
 };
-// 思路2： 用filter过滤不符合条件的元素
-const removeElement2 = function(nums, val) {
-  nums = nums.filter(item => item !== val);
-  return nums
-};
 
-var removeElement = function(nums, val) {
+function removeElement(nums, val) {
   // 思路3：双指针
   let left = 0, right = nums.length-1;
   while (left < right) {
@@ -55,7 +54,4 @@ var removeElement = function(nums, val) {
   return left + 1;
 };
 
-// const nums = [3,2,2,3], val = 3
-const nums = [0,1,2,2,3,0,4,2], val = 2
-const res = removeElement(nums, val)
-console.log(res)
+

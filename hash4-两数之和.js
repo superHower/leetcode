@@ -7,15 +7,16 @@
 */
 
 
-// const nums = [2,7,11,15], target = 9
-const nums = [3, 2, 4], target = 6
-console.log(twoSum(nums, target)) // [0, 1] or [1, 0]
+// const nums = [2,7,11,15], target = 9 // [0,1]
+const nums = [3, 2, 4], target = 6 // [1,2]
+console.log(twoSum(nums, target)) 
 
 
 /**
+ * map{值：位置}
  * 遍历
- *   map有补数 -> 立刻返回[这个map的键，这个的索引]
- *   map无补数 -> 放入map
+ *   map有补数 -> 立刻返回[map里这个补数的位置，当前位置]
+ *   map无补数 -> 放入map{当前值：当前位置}
 */
 
 

@@ -9,14 +9,17 @@
 其中前 m 个元素表示应合并的元素，后 n 个元素为 0 ，应忽略。nums2 的长度为 n 。
 */
 
+const nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+console.log(merge1(nums1, m, nums2, n))
+
 /**
- * @param {number[]} nums1
- * @param {number} m
- * @param {number[]} nums2
- * @param {number} n
- * @return {void} Do not return anything, modify nums1 in-place instead.
+ * 有3个指针，指向两数组尾巴，和合并后的数组的尾巴
+ * 1. 两数组都存在
+ *    从后往前，谁大谁放nums1后面
+ * 2. nums1不存在
+ *    nums2直接放
  */
-var merge1 = function(nums1, m, nums2, n) {
+function merge1(nums1, m, nums2, n) {
   // 思路1：双指针
   let p1 = m-1 // p1 nums2的尾
   let p2 = n-1 // p2 nums1的尾
@@ -32,7 +35,7 @@ var merge1 = function(nums1, m, nums2, n) {
       p2--
     }
     p--
-    console.log(nums1)
+    // console.log(nums1)
   }
   // nums1不存在
   while (p2 >= 0) {
@@ -40,7 +43,7 @@ var merge1 = function(nums1, m, nums2, n) {
     p2--
     p--
   }
-  
+  return nums1
 };
 
 var merge2 = function(nums1, m, nums2, n) {
@@ -52,10 +55,7 @@ var merge2 = function(nums1, m, nums2, n) {
 
 }
 
-const nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
-// merge1(nums1, m, nums2, n)
-merge2(nums1, m, nums2, n)
-console.log(nums1)
+
 /*
 示例 2：输入：nums1 = [1], m = 1, nums2 = [], n = 0
 输出：[1]

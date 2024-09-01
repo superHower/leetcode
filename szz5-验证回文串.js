@@ -9,7 +9,7 @@
 */
 
 
-var isPalindrome = function(s) {
+function isPalindrome(s) {
   // 1. 先将字符串转换为小写字母
   // 2. 移除所有非字母数字字符
 
