@@ -23,27 +23,18 @@
 0 <= strs[i].length <= 200
 strs[i] 仅由小写英文字母组成
 */
-/**
- * @param {string[]} strs
- * @return {string}
- */
-/**
- * @param {string[]} strs
- * @return {string}
- */
+
 var longestCommonPrefix = function(strs) {
-  if(strs.length == 0) 
-      return "";
+  if(strs.length == 0)  return "";
   let ans = strs[0];
+
   for(let i =1;i<strs.length;i++) {
-      let j=0;
-      for(;j<ans.length && j < strs[i].length;j++) {
+      for(let j=0; j<ans.length && j < strs[i].length;j++) {
           if(ans[j] != strs[i][j])
               break;
       }
       ans = ans.substr(0, j);
-      if(ans === "")
-          return ans;
+      if(ans === "") return ans;
   }
   return ans;
 };
