@@ -31,13 +31,14 @@ var totalNQueens_1 = function(n) {
           res++
       }
       for(var i=0;i<n;i++) {
-          if(!vertical[i] && !horitonal[index] &&
-          !diagonalRight[i+index] && !diagonalLeft[i-index]){
+          if(!vertical[i] && !horitonal[index] && !diagonalRight[i+index] && !diagonalLeft[i-index]){
               vertical[i] = true;
               horitonal[index] = true;
               diagonalRight[i+index] = true;
               diagonalLeft[i-index] = true;
+
               putQueen(n,index+1);
+              
               vertical[i] = false;
               horitonal[index] = false;
               diagonalRight[i+index] = false;
