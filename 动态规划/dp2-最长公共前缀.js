@@ -9,8 +9,8 @@ function longestCommonPrefix(strs) {
   let dp = Array.from({ length: strs.length }, () => Array(strs[0].length).fill(0));
   
   // 填充 dp 数组
-  for (let i = 0; i < strs.length; i++) {
-      for (let j = 0; j < Math.min(strs[i].length, strs[0].length); j++) {
+  for (let i = 0; i < strs.length; i++) { // ["flower", "flow", "flight"]
+      for (let j = 0; j < Math.min(strs[i].length, strs[0].length); j++) { // "flower"
           if (strs[i][j] === strs[0][j]) { // 每个字符串都和第一个字符串比较
               dp[i][j] = j + 1;
           } else {
@@ -28,4 +28,10 @@ function longestCommonPrefix(strs) {
   // 构造最长公共前缀
   return strs[0].substring(0, maxLength);
 }
-
+/*
+[ 
+  [ 1, 2, 3, 4, 5, 6 ], 
+  [ 1, 2, 3, 4, 0, 0 ], 
+  [ 1, 2, 0, 0, 0, 0 ] 
+]
+*/
