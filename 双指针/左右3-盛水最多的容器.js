@@ -2,24 +2,22 @@ const height = [1,8,6,2,5,4,8,3,7]  // 49 解释：在8和7两根柱子之间盛
 // const height = [1,1]                   // 1
 console.log(maxArea(height))
 
-/**
- * 左右，往中间指
- * 找下标之差 * 值之差 的最大
- */
 
 function maxArea(height) {
-  let left = 0, right = height.length-1, maxArea = 0;
+  let len = height.length
+  let left = 0; right = len-1;
 
+  let max = 0
   while(left < right) {
-    let ans = (Math.min(height[left], height[right])) * (right - left);
-    maxArea = Math.max(maxArea, ans);
-        
-    if(height[left] > height[right])   right--
-    else                               left++
-  }
-  return maxArea
-};
+      let area = Math.min(height[left], height[right]) * (right - left)
+      max = Math.max(max, area)
 
+      if(height[left] > height[right]) right--
+      else left++
+  }
+
+  return max
+};
 
 
 
