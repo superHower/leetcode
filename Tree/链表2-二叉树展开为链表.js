@@ -1,5 +1,5 @@
 var flatten = function (root) {
-  const list = [];
+  let list = [], prev = []
 
   const preorderTraversal = (root, list) => {
     if (root != null) {
@@ -12,9 +12,10 @@ var flatten = function (root) {
 
   // 此时 遍历完 二叉树，拿到list数组
   for (let i = 1; i < list.length; i++) {
-    let prev = list[i - 1], curr = list[i];
+    prev = list[i - 1]
+
     prev.left = null;
-    prev.right = curr;
+    prev.right = list[i];
   }
   return prev
 };
