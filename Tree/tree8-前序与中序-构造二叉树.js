@@ -1,4 +1,9 @@
-var buildTree = function (preorder, inorder) {
+const preorder = [3, 9, 20, 15, 7], inorder = [9, 3, 15, 20, 7]
+console.log(buildTree(preorder, inorder))
+
+
+
+function buildTree(preorder, inorder) {
   if (!preorder.length || !inorder.length) return null;
   // 先确定根节点
   const rootVal = preorder[0];
@@ -13,5 +18,12 @@ var buildTree = function (preorder, inorder) {
 
   return root;
 };
-const preorder = [3, 9, 20, 15, 7], inorder = [9, 3, 15, 20, 7]
-console.log(buildTree(preorder, inorder))
+
+
+
+
+function TreeNode(val, left, right) {
+  this.val = (val === undefined ? 0 : val)
+  this.left = (left === undefined ? null : left)
+  this.right = (right === undefined ? null : right)
+}

@@ -10,7 +10,12 @@
  * Math.floor(n / i) 用于计算 n! 中包含的 5 的因子的数量，因为每 5、10、15... 都会贡献至少一个 5 的因子。
  * 循环直到 n / i < 1，这时已经没有足够的 5 的因子可以贡献到阶乘中了。
  */
-var trailingZeroes = function(n) {
+
+const n = 7   // 输出：0 // 解释：3! = 6 ，不含尾随 0
+console.log(trailingZeroes(n))
+
+
+function  trailingZeroes(n) {
   let count = 0;
   // 不断除以 5，直到商小于 1
   while (n >= 5) {
@@ -19,33 +24,5 @@ var trailingZeroes = function(n) {
       console.log(n)
   }
   return count;
-};
-
-const n = 7
-// 输出：0
-// 解释：3! = 6 ，不含尾随 0
-console.log(trailingZeroes(n))
-
-/**
- * 0707-18:14  这里只能用于比较小的数，如果太大就报错
- */
-var trailingZeroes_1 = function(n) {
-  if(n==0) return 0
-  let res = 1, sum = 0
-  for(let i = 1; i<=n;i++) {
-    res = i*res
-  }
-  let str = res.toString()
-  console.log(str)
-  for(let i = str.length-1; i >=0  ;i--)
-  {
-    console.log(str[i])
-    if(str[i] == 0){
-      sum++
-    }else {
-      break
-    }
-  }
-  return sum
 };
 

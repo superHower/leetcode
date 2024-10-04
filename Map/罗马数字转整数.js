@@ -20,57 +20,18 @@ X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。
 C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
 给定一个罗马数字，将其转换成整数。
 
- 
 
-示例 1:
-
-输入: s = "III"
-输出: 3
-示例 2:
-
-输入: s = "IV"
-输出: 4
-示例 3:
-
-输入: s = "IX"
-输出: 9
-示例 4:
-
-输入: s = "LVIII"
-输出: 58
-解释: L = 50, V= 5, III = 3.
-示例 5:
-
-输入: s = "MCMXCIV"
-输出: 1994
-解释: M = 1000, CM = 900, XC = 90, IV = 4.
+const s = "III"  // 输出: 3
+const s = "IV"  // 输出: 4
+const s = "IX"  //输出: 9
+const s = "LVIII" // 输出: 58  解释: L = 50, V= 5, III = 3.
+const s = "MCMXCIV"  //输出: 1994 解释: M = 1000, CM = 900, XC = 90, IV = 4.
  
 */
-/**
- * @param {string} s
- * @return {number}
- */
-/**
- * @param {string} s
- * @return {number}
- */
 var romanToInt = function(s) {
-  const map = {
-      I : 1,
-      IV: 4,
-      V: 5,
-      IX: 9,
-      X: 10,
-      XL: 40,
-      L: 50,
-      XC: 90,
-      C: 100,
-      CD: 400,
-      D: 500,
-      CM: 900,
-      M: 1000
-  };
+  const map = { I : 1, IV: 4, V: 5, IX: 9, X: 10, XL: 40, L: 50, XC: 90, C: 100, CD: 400, D: 500, CM: 900, M: 1000 };
   let ans = 0;
+
   for(let i = 0;i < s.length;) {
       if(i + 1 < s.length && map[s.substring(i, i+2)]) {
           ans += map[s.substring(i, i+2)];
