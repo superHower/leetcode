@@ -17,5 +17,9 @@ var flatten = function (root) {
     prev.left = null;
     prev.right = list[i];
   }
+
+  for(let item of list) {
+    
+  }
   return prev
 };
