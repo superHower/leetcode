@@ -19,8 +19,7 @@ function maxPathSum (root) {
     let R = dfs(root.right);
 
     maxSum = Math.max(maxSum, L + R + root.val); // 更新最大纪录
-    const outputMaxSum = root.val + Math.max(0, L, R); // 当前子树对外提供的最大和
-    // 如果对外提供的路径和为负，直接返回0。否则正常返回
+    const outputMaxSum = root.val + Math.max(0, L, R); // 这个节点的最大路径，要在左和右中选一个
     return outputMaxSum < 0 ? 0 : outputMaxSum;
   }
 }
