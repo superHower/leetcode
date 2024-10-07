@@ -1,26 +1,20 @@
 /* 归并排序：合并 都是升序的左右链表
 
-递归:
-  结束：head 和 head.next 都不空
+递归（头，尾）:
+  结束：头空          返回头
+  结束：头.next==尾   返回 空了的头
 
-  找mid:  while(head){ 快的走两步; 慢的走一步 }
-          mid就是慢的位置
+  中 = 快慢指针
+  左 = 排好序的（头，中）
+  右 = 排好序的（中，尾）
 
-   while（ 左右都有 ） { 
-      谁小就把谁 加入 dummy, 并移动他;
-      不停移动 temp;
-   }
-
-   最后剩下一个【大的】没有加进去， 把他加进dummy
-
-   返回: 这个 dummy
+  返回：合并好的左右链表
 */
 
 
 const toSortList = (head, tail) => {
-    // 必须要保证head不是空的
     if (head === null) return head;
-    if (head.next === null) { head.next = null; return head }
+    if (head.next === tail) { head.next = null; return head }
 
     let slow = fast = head;
 
@@ -34,10 +28,10 @@ const toSortList = (head, tail) => {
     let LNode = toSortList(head, mid)
     let RNode = toSortList(mid, tail)
 
+    // 下面开始合并
     let temp = dummyHead = new ListNode(0) // 空链表
 
     while (LNode && RNode) {
-        // 谁小就把谁 加入 dummy, 并移动
         if (LNode.val <= RNode.val) { 
             temp.next = LNode;
             LNode = LNode.next;
@@ -47,13 +41,8 @@ const toSortList = (head, tail) => {
         }
         temp = temp.next; // temp 不断移动
     }
-    // 最后剩下一个【大的】没有加进去， 把他加进去
-    if (LNode) 
-        temp.next = LNode;
-    else if (RNode) 
-        temp.next = RNode;
-    
-    return dummyHead.next; // dummy就是 两者合并
+    temp.next = LNode ? LNode : RNode // 最后剩个【大的】没有加进去
+    return dummyHead.next;
 }
 
 var sortList = function(head) {

@@ -1,4 +1,11 @@
 // 层序遍历, BFS, 返回每一层的结果
+/**
+ *     1
+ *  2     3
+ * 4  5   
+ * 
+ * 输出： [ [1], [2,3], [4,5] ]
+ */
 function levelOrder(root) {
   const res = [], level = [];
   if (!root) return res;

@@ -1,4 +1,10 @@
 // 输入： [[1,4,5],[1,3,4],[2,6]] 输出： 1->1->2->3->4->4->5->6
+/*
+  k个链表进行分左右
+  分到（头==尾）说明分到头了
+
+  合并左右链表
+*/
 var mergeKLists = function(lists) {
   if(!lists.length) return null;
 
@@ -10,7 +16,8 @@ var mergeKLists = function(lists) {
     let mid = start + Math.floor((end - start) / 2);
     let leftList = mergeList(start, mid);
     let rightList = mergeList(mid + 1, end)
-  
+    
+    // 下面开始合并链表
     let temp = dummy = new ListNode(0)
   
     while(leftList && rightList) {
