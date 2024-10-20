@@ -1,7 +1,36 @@
 const nums = [1,2,3] // 输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
 console.log(permute(nums))
 
-var permute = function(nums) {
+function permute(nums) {
+  let path = [], res = []
+  backtrack([])
+  return res
+
+  function backtrack(used) {
+    if(path.length == nums.length) {
+      res.push([...path])
+      return 
+    }
+
+
+    for(let n of nums) {
+      if(used[n]) continue // 这里忘记了， 出现过的要跳过
+
+      path.push(n)
+      used[n] = true // used放的是值， 不是索引
+
+      backtrack(used)
+
+      path.pop()
+      used[n] = false
+    }
+
+
+  }
+}
+
+
+var permute1 = function(nums) {
   const res = [], path = [], len = nums.length;
   backtracking([]); // 一开始 就是全都没有用过
   return res;

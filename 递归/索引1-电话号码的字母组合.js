@@ -1,8 +1,29 @@
-const digits = "234" // 输出：["ad","ae","af","bd","be","bf","cd","ce","cf"]
+const digits = "23" // 输出：["ad","ae","af","bd","be","bf","cd","ce","cf"]
 console.log(letterCombinations(digits))
 
-
 function letterCombinations(digits) {
+  const arr = ["","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"];
+  let res = [], path = []
+  
+  backTrack(0) // 0，表示的是digits这个字符串的下标
+  return res
+
+  function backTrack(index) {
+    if(path.length == digits.length) {
+      res.push(path.join(""))
+      return 
+    }
+    for(let s of arr[digits[index]]) { // 到谁了就遍历递归谁
+      path.push(s)
+      backTrack(index+1)
+      path.pop()
+    }
+
+  }
+
+}
+
+function letterCombinations1(digits) {
   const len = digits.length;
   const arr = ["","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"];
 

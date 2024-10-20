@@ -1,97 +1,80 @@
-/*
-79. 单词搜索
-给定一个 m x n 二维字符网格 board 和一个字符串单词 word 。如果 word 存在于网格中，返回 true ；否则，返回 false 。
+const board = [
+  ["A","B","C","E"],
+  ["S","F","C","S"],
+  ["A","D","E","E"]
+]
+const word = "ABCCED"
+console.log(exist(board, word)) // 输出：true
 
-单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。
-*/
+function exist(board, word) {
+  let rows = board.length, cols = board[0].length
+  for(let i=0; i<rows; i++){
+    for(let j=0; j<cols; j++) {
+      if(dfs(i,j,0)) return true
+    }
+  }
 
+  return false
 
-/**
- * 我现在尝试自己写出来
- */
-var exist = function(board, word) {
-  let rows = board.length;
-  let cols = board[0].length;
+  function dfs(i, j , index) {
+    if(index == word.length) return true
+    if(i<0 || j>cols-1 || i>rows-1 || j<0 || word[index] !== board[i][j]) return false
 
-  function dfs(i, j, index) {
+    let dir = [[0,1], [0,-1], [1,0], [-1,0]]
+    let record = board[i][j]
+    board[i][j] = '#'
 
-    if(index === word.length) return true; // 如果索引超出单词长度，说明找到了单词
-    if(i<0 || i>rows-1 || j<0 || j>cols-1 || word[index]==board[i][j]) // 超出边界 || 当前字符不匹配当前位置
-     return false;
-
-    let temp = board[i][j];
-    board[i][j] = '#'; // 标记当前单元格已访问
-
-    let directions = [[0, 1], [1, 0], [0, -1], [-1, 0]]; // 右，下，左，上
-
-    // 上下左右搜索
-    for(let k = 0; k < directions.length; k++) {
-      let newi = i + directions[k][0];
-      let newj = j + directions[k][1];
-      if (dfs(newi, newj, index+1)) return true;
+    for(let k=0; k<dir.length; k++){
+        if(dfs(i+dir[k][0], j+ dir[k][1], index+1)) return true
     }
 
-    // 递归结束
-    board[i][j] = temp; // 恢复当前单元格，回溯
-    return false;
-
-
+    board[i][j] = record
+    return false
   }
+}
+
+function exist2(board, word) {
+  let rows = board.length, cols = board[0].length;
 
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       if (dfs(i, j, 0)) return true;
     }
   }
-
   return false
 
+  function dfs(i, j, index) {
 
+    if(index === word.length) return true; // word遍历结束
+    if(i<0 || i>rows-1 || j<0 || j>cols-1 || word[index] !== board[i][j]) // 越界 || 不匹配
+      return false
+
+    // 标记
+    let record = board[i][j];
+    board[i][j] = '#'; 
+
+    let directions = [[0, 1], [1, 0], [0, -1], [-1, 0]]; // 右，下，左，上
+
+    // 搜索
+    for(let k = 0; k < directions.length; k++) {
+      if (dfs( i + directions[k][0], j + directions[k][1], index+1))
+         return true;
+    }
+    // 回溯
+    board[i][j] = record; 
+    return false;
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 /**
  * 0711-20:21 直接看答案的
  */
-var exist = function(board, word) {
+function exist1(board, word) {
   var rows = board.length;
   var cols = board[0].length;
 
-  /**
-   * 
-   * @param {*} x board的位置x
-   * @param {*} y board的位置y
-   * @param {*} index word的索引
-   * @returns 
-   */
   function dfs(x, y, index) {
       // 如果索引超出单词长度，说明找到了单词
       if (index === word.length) return true;
@@ -131,6 +114,3 @@ var exist = function(board, word) {
   return false;
 };
 
-const board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
-// 输出：true
-console.log(exist(board, word))

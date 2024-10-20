@@ -1,8 +1,31 @@
 const candidates = [2,3,6,7], target = 7 // 输出：[[2,2,3],[7]]
 console.log(combinationSum(candidates, target))
 
-
 function combinationSum(candidates, target) {
+  let res = [], path = [], sum = 0
+  candidates.sort((a, b) => a-b)
+
+  backTrack(0, sum)
+  return res
+
+  function backTrack(start, sum) {
+    if(sum == target) {
+      res.push([...path])
+      return res
+    }
+
+    if(sum < target) {
+      for(let i = start; i < candidates.length; i++) {
+        path.push(candidates[i])
+        backTrack(i, sum + candidates[i]) // backTrack(i)说明可以有重复的如：[2,2] 
+        path.pop()
+      }
+    }
+  }
+
+}
+
+function combinationSum1(candidates, target) {
   let res = [], path = []
   candidates.sort((a, b)=> { return a-b })
   backTrack(0,0)
