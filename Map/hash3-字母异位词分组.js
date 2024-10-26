@@ -19,21 +19,19 @@ console.log(groupAnagrams(strs))
  */
 
 function groupAnagrams(strs) {
-  const map = new Map()
-  for (let str of strs) {
-    let array = Array.from(str) // 利用from 将字符串转成，字符串数组
-    array.sort() // 排序
-    let key = array.toString() // 将字符串数组，恢复成字符串
+  let map = new Map()
 
-    // 确定要放进哪个list中，没有就新建一个
-    let list = map.get(key) ? map.get(key) : new Array()
-    list.push(str)
-    
-    // 放进map中
-    map.set(key, list);
+  for(str of strs) {
+      let arr =Array.from(str)
+      arr.sort()
+      let key = arr.join("")
+
+      let list = map.get(key) ? map.get(key) : []
+      list.push(str)
+      map.set(key, list)
   }
-  console.log(map.values()) // 这个结果是个Iterator
-  return Array.from(map.values())  // 要转成数组
+
+  return Array.from(map.values())
 
 };
 

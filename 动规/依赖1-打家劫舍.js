@@ -1,24 +1,23 @@
-/*
-198. 打家劫舍
-小偷不能偷相邻房屋，求最高金额。
-*/
-
 const nums = [2,7,9,3,1, 2] // 13
 console.log(rob(nums))
-
+/*
+  依赖关系：【当前】屋子累计最大金额 =  {
+                              不偷当前屋子？【上个屋子】累计最大金额
+                                偷当前屋子？【上上屋子】累计最大金额 + 这个屋子金额
+  }
+*/
 function rob(nums) {
   const n = nums.length;
   if (n === 0) return 0;
   if (n === 1) return nums[0];
 
-  let dp = new Array(n).fill(0);  // 从第 i 间房屋开始，能够偷窃到的最大金额
+  let dp = new Array(n).fill(0);  // 到第 i 间房屋，能偷的最大金额
   dp[0] = nums[0];
   dp[1] = Math.max(nums[0], nums[1]);
 
   for (let i = 2; i < n; i++) {
-    dp[i] = Math.max(dp[i - 1], nums[i] + dp[i - 2]);
+    dp[i] = Math.max(dp[i - 1],  dp[i - 2] + nums[i]);
   }
-
   return dp[n - 1];
 };
 
