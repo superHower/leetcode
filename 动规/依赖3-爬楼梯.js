@@ -2,7 +2,7 @@ let n = 2 // 输出：2
 // let n = 3 //输出：3 
 
 /*
-  依赖：当前这层 方法数 = 【上层】 方法数 + 【上上层】 方法数
+  当前这层 方法数 = 【上层】 方法数 + 【上上层】 方法数
 */
 console.log(climbStairs(3))
 function climbStairs(n) {

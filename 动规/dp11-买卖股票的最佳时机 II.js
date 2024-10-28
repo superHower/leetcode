@@ -1,30 +1,24 @@
 /*
-122. 买卖股票的最佳时机 II
-
-给你一个整数数组 prices ，其中 prices[i] 表示某支股票第 i 天的价格。
-在每一天，你可以决定是否购买和/或出售股票。你在任何时候 最多 只能持有 一股 股票。
-你也可以先购买，然后在 同一天 出售。
-
-返回 你能获得的 最大 利润 。
+每天都可以 买卖股票。（甚至同一天 先买后卖）
+但是 最多 只能持有一股股票。
 */
-
+const prices = [7,1,5,3,6,4]
+console.log(maxProfit(prices)) // 7
 
 /**
- * @param {number[]} prices
- * @return {number}
+ * 今天持有  的利润 = { 不买卖  or  前天不持有股票，并在今天买入  }
+ * 今天不持有的利润 = { 不买卖  or  前天持有股票，  并在今天卖出 }
  */
+
+
 var maxProfit = function(prices) {
   let n = prices.length
-  let dp = new Array(n).fill(0).map(() => new Array(2).fill(0))// 初始化备忘录，n行2列
-  dp[0][0] = 0 // 第0天不持有 的利润
-  dp[0][1] = -prices[0]// 第0天持有 的利润 = 一旦持有就亏钱
+  let dp = new Array(n).fill(0).map(() => new Array(2).fill(0))// 某天 [持有或不持有的] 的利润
+  dp[0][0] = 0          // 第0天 不持有
+  dp[0][1] = -prices[0] // 第0天 持有
   for (let i = 1; i < n; i++) {
-    console.log('前天不持有股票的总利润', dp[i - 1][0])
-    console.log('前天持有股票，今天卖出的总利润', dp[i - 1][1] + prices[i])
-    dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]) // 今天不持有股票
-    console.log('前天持有股票的总利润', dp[i - 1][1])
-    console.log('前天不持有股票，今天购买的总利润', dp[i - 1][0] - prices[i])
-    dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]) // 今天持有股票
+    dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]) // 今天不持有的利润 = { 不买卖  or  前天持有股票，并在今天卖出 }
+    dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]) // 今天持有  的利润 = { 不买卖  or  前天不持有股票，并在今天买入  }
   }
   return dp[n - 1][0]
 
@@ -38,8 +32,7 @@ var maxProfit = function(prices) {
 
 
 
-const prices = [7,1,5,3,6,4]
-console.log(maxProfit(prices)) // 7
+
 
 
 /*

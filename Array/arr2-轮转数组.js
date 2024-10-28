@@ -1,25 +1,16 @@
-/*
-189. 轮转数组
-
-给定一个整数数组 nums，将数组中的元素向右轮转 k 个位置，其中 k 是非负数。
-*/
-
 const nums = [1,2,3,4,5,6,7], k = 3
 // const nums = [-1,-100,3,99], k = 2
 console.log(rotate(nums, k)) // [5,6,7,1,2,3,4]
 
 // 思路一：数组splice法
 function rotate1(nums, k) {
-  const n = nums.length;
-  // 分割数组
-  let left = nums.splice(n-k,k);
-  let right = nums.splice(0, n-k);
-  nums = left.concat(right);
-  console.log(nums)
+k = k % nums.length; 
+let part1=nums.splice(nums.length-k,k) // 21. 取出并删除后面的
+return nums.unshift(...part1)          // 2. 插到前面去
 };
 
 // 思路二：数组地址法
-function rotate(nums, k) {
+function rotate2(nums, k) {
   const n = nums.length;
   const newArr = new Array(n);
   for (let i = 0; i < n; ++i) {
@@ -57,3 +48,4 @@ function rotate(nums, k) {
 向右轮转 1 步: [99,-1,-100,3]
 向右轮转 2 步: [3,99,-1,-100]
 */
+

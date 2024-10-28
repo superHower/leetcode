@@ -4,8 +4,8 @@ const nums = [0,1,0,3,2,3]            // 4 解释： 【0,1,x,x,23】
 console.log(lengthOfLIS(nums)) 
 
 /**
- * 是递增？当前位置 最长子序列长度 = 当前位置  or  之前位置
-                                  dp[i]          dp[j] + 1
+ * 递增子序列的最大长度 =  是递增？  {  [现]  or  [前] +1  }
+
 */                  
 function lengthOfLIS(nums) {
   const dp = new Array(nums.length).fill(1) // 到 i 的位置， 递增子序列的最大长度

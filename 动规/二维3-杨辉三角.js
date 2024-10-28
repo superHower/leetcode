@@ -1,7 +1,7 @@
 console.log(generate(5))
 
 /*
-  依赖关系：值 = 左上值+ 正上值
+  值 = 左上值 + 正上值
 */
 
 function generate(n) {

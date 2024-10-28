@@ -1,19 +1,17 @@
-const text1 = "abcde", text2 = "aceda" // 3   解释：最长公共子序列是 "ace" ，它的长度为 3 。
+const text1 = "abcde"
+const text2 = "aceda" 
 // const text1 = "abc", text2 = "def"   // 0
-console.log(longestCommonSubsequence(text1, text2))
-/*
-text1 和 text2 在【之前】是公共？ 【现在 两者】的 最长公共子序列长度 = 【之前text1】和【之前text2】的长度 +1
-                        不是？   【现在 两者】的 最长公共子序列长度 = {
-                                                                    【之前 text1】和【现在 text2】的长度
-                                                                    【现在 text1】和【之前 text2】的长度
-                                                                    【之前 text1】和【之前 text2】的长度
-                                                                    }
+console.log(longestCommonSubsequence(text1, text2)) // 3   解释：最长公共子序列是 "ace" ，它的长度为 3 。
+/**
+*  最长公共子序列长度 = {
+*                  是公共         ？      之前二者公共长度 + 1
+*             t1[i-1] == t2[j-1] ？       [前t1 前t2]    + 1          
+*               不是公共            ：   { [前t1 现t2]  or [现t1 前t2] or [前t1 前t2] }         
+*                     }                   
 */
 
 function longestCommonSubsequence(text1, text2) {
   const len1 = text1.length, len2 = text2.length
-
-  // 表示 text1 的前 i 个字符和 text2 的前 j 个字符的最长公共子序列的长度。
   let dp = Array.from(new Array(len1 + 1), () => new Array(len2 + 1).fill(0))
 
     for(let i = 1; i < len1 + 1; i++) {
