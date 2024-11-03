@@ -26,15 +26,13 @@ function numIslands(grid) {
 
   for(let i = 0; i < rows; i++) 
     for(let j = 0; j < cols; j++) 
-      if(grid[i][j] == '1') {
-        dfs(i, j) //能进入1 并且出来的，就是岛屿
-        num++
+      if(grid[i][j] == '1') { // 只要进入岛屿（1）
+        dfs(i, j)
+        num++ // 岛屿数+1
       }
-
-
   return num
 
-  function dfs(i,j) {
+  function dfs(i,j) { // 岛屿（1） --->  海洋（0）
     if(i<0 || j<0 || i>rows-1 || j>cols-1 || grid[i][j] == '0') return
     
 

@@ -16,7 +16,7 @@ function exist(board, word) {
 
   return false
 
-  function dfs(i, j , index) {
+  function dfs(i, j , index) { // 能否找到 word[index]
     if(index == word.length) return true
     if(i<0 || j>cols-1 || i>rows-1 || j<0 || word[index] !== board[i][j]) return false
 

@@ -22,8 +22,8 @@ function solve(board) {
 
   for(let i = 0; i < rows; i++) 
     for(let j = 0; j < cols; j++) 
-      if ((i == 0 || i == rows - 1 || j == 0 || j == cols - 1) && board[i][j] == 'O') { //  边界处, 并且是 'O'，
-          dfs(i, j) // 标记里面所有'O'
+      if ((i == 0 || i == rows - 1 || j == 0 || j == cols - 1) && board[i][j] == 'O') { //  边界的'O'进入
+          dfs(i, j)
       }
 
   // 搜索结束， 处理标记
@@ -36,8 +36,8 @@ function solve(board) {
   return board
 
 
-  function dfs(i,j) { // 目标： 标记所有'O' 
-    if (i < 0 || j < 0 || i == rows || j == cols || board[i][j] !== 'O') return
+  function dfs(i,j) { // 目标： 'O' --> '#' 
+    if (i < 0 || j < 0 || i>rows-1 || j>cols-1 || board[i][j] !== 'O') return
 
     board[i][j] = '#'
 

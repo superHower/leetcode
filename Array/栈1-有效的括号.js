@@ -1,6 +1,11 @@
 const s = "([]{})"// 输出：true
 console.log(isValid(s))
 
+/**
+ * '左' ? 入栈
+ * '右' ? 栈顶是对应'左' ? 出栈 : 返回false 
+ */
+
 function isValid(str) {
     let stack = []
     for (let s of str) {

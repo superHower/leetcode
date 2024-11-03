@@ -1,57 +1,10 @@
 const n = 4
 console.log(totalNQueens(n))// 输出：2
 
-function totalNQueens(n) {
-  let board = new Array(n).fill('.').map(() => new Array(n).fill('.'))
-  let res = [], rows = board.length, cols = board[0].length
-
-  dfs(board, 0)
-  return res
-
-  function dfs(board, row) {
-    if (row == rows) {
-      const b = board.map(item => {
-        return item.join("")}
-      )
-      res.push([...b])
-      return
-    }
-    for (let col = 0; col < cols; col++) {
-      if (!isValid(board, row, col)) continue
-
-      board[row][col] = 'Q'
-      dfs(board, row + 1)
-      board[row][col] = '.'
-    }
-  }
-
-  function isValid(board, row, col) {
-    for (let i = 0; i < rows; i++) {
-      if (board[i][col] == 'Q') return false
-    }
-
-    for (let i = row - 1, j = col + 1; i >= 0 && j < cols; i--, j++) {
-      if (board[i][j] == 'Q') return false
-    }
-    for (let i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
-      if (board[i][j] == 'Q') return false
-    }
-
-
-    return true
-  }
-
-
-};
 
 /**
- * 我还是用经典的 棋盘深搜法
- * 
- * 思路：判断一个位置是否是N皇后：
- *      1. 列没有Q
- *      2. 左上没有Q
- *      3. 右上没有Q
- *  在有效的位置，放置Q。 要是每一行都能放的话，说明这是一种放置方法。
+ *  某行哪个位置能否放置皇后？ { 列、左上、右上 }都没有 Q ，就可以放
+ *  逐行: 验证每个位置是否有效？放置 Q
  */
 
 function totalNQueens3(n) {
@@ -62,7 +15,7 @@ function totalNQueens3(n) {
   return res
 
 
-  function dfs(board, row) { // 目标： 有效的位置，放Q
+  function dfs(board, row) { // 目标： 验证每个位置是否有效？放置 Q
     if (row === board.length) {
       res++
       return
