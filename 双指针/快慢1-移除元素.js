@@ -13,9 +13,8 @@ function removeElement1(nums, val) {
 function removeElement(nums, val) {
   let slow = 0;
   for (let fast = 0; fast < nums.length; fast++) { // 快指针不停移动
-    if (nums[fast] !== val) { // 快指针 没找到val, 慢指针就跟着移动
-        nums[slow++] = nums[fast]; // 慢位置，被快位置覆盖掉 ==》 就实现删除元素
-    }
+    if (nums[fast] !== val) nums[slow++] = nums[fast]
   }
-  return slow;
+  
+  return nums.slice(0, slow);
 };

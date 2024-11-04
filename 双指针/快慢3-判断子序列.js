@@ -3,12 +3,11 @@ const s = "axc", t = "ahbgdc" // false
 console.log(isSubsequence(s, t))
 
 function isSubsequence(s, t) {
-  let n = s.length, m = t.length;
   let slow = 0
 
-  for (let fast = 0 ;  fast < m; fast++) {
-    if (slow < n && s[slow] == t[fast]) slow++;
+  for (let fast = 0 ; fast < t.length; fast++) { // 快的一直走
+    if (slow < s.length && s[slow] == t[fast]) slow++; //慢的，满足条件才走
   }
-  return slow == n;
+  return slow == s.length;
 };
 

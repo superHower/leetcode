@@ -4,13 +4,12 @@ console.log(maxArea(height))
 
 
 function maxArea(height) {
-  let len = height.length
-  let left = 0; right = len-1;
+  let left = 0; right = height.length-1;
 
   let max = 0
   while(left < right) {
       let area = Math.min(height[left], height[right]) * (right - left)
-      max = Math.max(max, area)
+      max = Math.max(max, area)// 更新最大值
 
       if(height[left] > height[right]) right--
       else left++

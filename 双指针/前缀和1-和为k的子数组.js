@@ -1,5 +1,5 @@
 // const nums = [1,-1,0], target = 0   // 输出：3
-const nums = [1,2,0,0,3, -1, 4, 6], target = 3   // 输出：2
+const nums = [1,2,0,0,3, -1, 4, 6], target = 3   // 输出：7
 console.log(subarraySum(nums, target))
 
 
