@@ -1,12 +1,17 @@
 /**
- *      for (let right = 0; right < s.length; right++) {
- *        while ( s[right]怎么怎么样 )) {
- *            s[left++]
- *        }
+ * 1. 无重复的最长子串
+ * 2. 找字符串的 所有 字母异位词
+ * 3. 最小覆盖 子串
+ * --------------------------------------------------
+ *    for (let right = 0; right < s.length; right++) {
+ *      while ( s[right]怎么怎么样 )) {
+ *          s[left++]
+ *      }
+ *    }
  */
 
 // 【无重复的最长 子串】
-// const s = "wspwwkew"   // 3 解释: 子串是 "wke"，长度为 3。注意，"pwke" 是子序列，不是子串。
+const s = "wspwwkew"   // 3 解释: 子串是 "wke"，长度为 3。注意，"pwke" 是子序列，不是子串。
 /**
  * 
  * 去重 -》 
@@ -27,7 +32,7 @@ function lengthOfLongestSubstring(s) {
 }
 
 // 【找字符串的 所有 字母异位词】
-// const s = "cbaebabacd", p = "abc"  // [0,6]  解释: "abc" 的异位词： 0处 的"cba" |  6处 的"bac"
+const s1 = "cbaebabacd", p = "abc"  // [0,6]  解释: "abc" 的异位词： 0处 的"cba" |  6处 的"bac"
 // const s = "abab", p = "ab"   // [0,1,2]      解释: "ab" 的异位词： 0 的"ab" | 1 的"ba" | 2 的 "ab" 
 function findAnagrams(s, p) {
   let ans=[], left=0
@@ -53,7 +58,7 @@ function findAnagrams(s, p) {
 
 // 【最小覆盖 子串】
 
-// const s = "ADOBECODEBANC", t = "ABC" // "BANC" 解释：最小覆盖子串 "BANC" 包含来自字符串 t 的 'A'、'B' 和 'C'。
+const s2 = "ADOBECODEBANC", t = "ABC" // "BANC" 解释：最小覆盖子串 "BANC" 包含来自字符串 t 的 'A'、'B' 和 'C'。
 // const s = "a", t = "aa"              // "" 解释: t 中两个字符 'a' 均应包含在 s 的子串中, 无最小覆盖字串
 function isCovered(cntS, cntT) {
   for (let i = 'A'.charCodeAt(0); i <= 'Z'.charCodeAt(0); i++) {

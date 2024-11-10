@@ -12,8 +12,6 @@ function simplifyPath(path) {
       ans.push(s)
     else if(s == ".." && ans.length > 0)
       ans.pop()
-
-    console.log(ans)
   }
   return "/" + ans.join("/")
 };

@@ -17,8 +17,6 @@ var canJump = function(nums) {
         max = Math.max(max, i + nums[i]);// 当前位置的最大跳跃距离
     }
     return true;
-
-
 };
 
 // const nums = [2,3,1,1,4];
