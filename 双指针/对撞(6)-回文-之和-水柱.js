@@ -2,13 +2,22 @@
  * 对撞指针
  * ----------------------------------------------------------------------------------------------------------
  * 1. 判断回文串         const str = "A man, a plan, a canal: Panama" // true
- * 2. 最长回文串         const s = "cbbbd" // 输出："bb"  // const s = "babad" // 输出："bab"
+ * 2. 最长回文串 (发散)  const s = "cbbbd" // 输出："bb"  // const s = "babad" // 输出："bab"
+ * 3. 回文子串个数（发散）
  * 3. 两数之和-有序数组  const numbers = [2,7,11,15], target = 9 // [1,2]：解释：返回两数的位置
- * 4. 三数之和          const nums = [-1,0,1,2,-1,-4]    // [ [ -1, -1, 2 ], [ -1, 0, 1 ] ]
+ * 4. 三数之和           const nums = [-1,0,1,2,-1,-4]    // [ [ -1, -1, 2 ], [ -1, 0, 1 ] ]
  * 5. 盛水最多的容器     const height_1 = [1,8,6,2,5,4,8,3,7]  // 49 解释：在8和7两根柱子之间盛水最多=7 * (8-1)
- * 6. 接雨水            const height = [0,1,0,2,1,0,1,3,2,1,2,1] // 6
+ * 6. 接雨水             const height = [0,1,0,2,1,0,1,3,2,1,2,1] // 6
  * -----------------------------------------------------------------------------------------------------------
- */
+ *   while(left < right) {
+ *     left-- 
+ *     right++
+ *   }
+ * --------------------------------------------------------------------------------------------------------
+ * 注意！
+ * 
+ * 三数之和： 自己去重时，是直接continue,而不是while循环
+ * --------------------------------------------------------------------------------------------------------*/
 
 // 【判断回文串】：左右对撞
 const str = "A man, a plan, a canal: Panama" // true
@@ -29,30 +38,41 @@ function isPalindrome(s) {
 
 // 【最长回文串】：中心发散
 /**
- * 区分单独的（i, i）和前后相同的（i,i+1）
- * 更新res
+ * 迭代寻找子串：区分单独的（i, i）和前后相同的（i,i+1）
+ *     能找到就更新最长
  */
-const s = "cbbbd" // 输出："bb"  // const s = "babad" // 输出："bab"
+const s = "cbadbdacccbd" // 输出："bb"  // const s = "babad" // 输出："bab"
+console.log(longestPalindrome(s))
 function longestPalindrome(s) {
-  let res = "";
+  let maxStr = "";
   for(let i = 0;i < s.length;i++) {
-    let s1 = '', s2 = ''
-    s1 = palindrome(s,i,i)                  // 正常情况
-    if(i == i+1 ) s2 = palindrome(s,i,i+1); // 前后相等的情况
-
-    res = res.length > s1.length ? res : s1; // 更新最长
-    res = res.length > s2.length ? res : s2; // 更新最长
+    palindrome(s,i,i)   //     单独的情况: c
+    palindrome(s,i,i+1); // 前后相等的情况: cc
   }
-  return res;
-
-  function palindrome(s, l, r){ // 以(l, r)为中心，左右相等？就继续移动
-    while(l >= 0 && r < s.length && s.charAt(l) == s.charAt(r)) {
-        l--;
-        r++
-    }
-    return s.substring(l+1,r);
+  return maxStr
+  function palindrome(s, l ,r) {
+    while(l >= 0 && r < s.length && s[l] == s[r]) {l--;r++}
+    let curLen = r-l-1
+    if(curLen > maxStr.length)  maxStr = s.slice(l+1, r) // 更新最长字符串
   }
+
 };
+
+// 【回文子串个数】：中心发散
+/**
+ * 迭代寻找子串：注意区分单独和相等
+ */
+function countSubstrings(s) {
+  let count = 0;
+  for (let i = 0; i < s.length; i++) {
+      for (let l = i, r = i;   l >= 0 && s[l] === s[r]; l--, r++) count++;
+      for (let l = i, r = i+1; l >= 0 && s[l] === s[r]; l--, r++) count++;
+  }
+  return count;
+};
+
+
+
 
 // 【两数之和-有序数组】
 const numbers = [2,7,11,15], target = 9 // [1,2]：解释：返回两数的位置
@@ -130,12 +150,9 @@ function trap(height) {
       leftMax = Math.max(leftMax, height[left]);
       rightMax = Math.max(rightMax, height[right]);
  
-      if (height[left] < height[right]) {  ans += leftMax - height[left];   left++;  } 
-      else                              {  ans += rightMax - height[right]; right--; }
+      if (height[left] < height[right]) ans += leftMax - height[left++]
+      else                              ans += rightMax - height[right--]
   }
 
   return ans;
 };
-
-
-

@@ -2,8 +2,9 @@
 /**
  * other
  * ----------------------------------------------------------------------------------------------------------
- * 1. 合并数组-有序 const arr1 = [1, 3, 5], arr2 = [2, 12, 4, 6]; // [ 1, 2, 3, 4, 5, 6 ]
- * 2. 颜色分类      const nums3 = [2,0,2,1,1,2] // 输出：[0,0,1,1,2,2] 解释：前面存0，中间存1，后面存2
+ * 1. 合并数组-有序          const arr1 = [1, 3, 5], arr2 = [2, 12, 4, 6]; // [ 1, 2, 3, 4, 5, 6 ]
+ * 2. 合并数组-有序-限制数量  const nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3 // [ 1, 2, 3, 4, 5, 6 ]
+ * 3. 颜色分类               const nums3 = [2,0,2,1,1,2] // 输出：[0,0,1,1,2,2] 解释：前面存0，中间存1，后面存2
  * 
  *----------------------------------------------------------------------------------------------------------*/
 
@@ -17,19 +18,32 @@ function mergeSortedArraysUsingMergeSort(arr1, arr2) {
   let result = [], p1 = 0, p2 = 0;
 
   while (p1 < arr1.length && p2 < arr2.length) {
-    if (arr1[p1] < arr2[p2]) { result.push(arr1[p1]); p1++; }
-    else { result.push(arr2[p2]); p2++; }
+    if (arr1[p1] < arr2[p2])  result.push(arr1[p1++]) 
+    else                      result.push(arr2[p2++]) 
   }
   // 可能左或者右， 没有指完，继续接着指
-  while (p1 < arr1.length) { result.push(arr1[p1]); p1++; }
-  while (p2 < arr2.length) { result.push(arr2[p2]); p2++; }
+  while (p1 < arr1.length) { result.push(arr1[p1++])}
+  while (p2 < arr2.length) { result.push(arr2[p2++])}
 
   return result;
 }
+// 【合并数组-有序-限制数量】
+function merge(nums1, m, nums2, n) {
+  let p1 = m - 1, p2 = n - 1, k = m + n - 1;
+  while (p1 >= 0 || p2 >= 0) {
+      if(p1 < 0)                     nums1[k--] = nums2[p2--];
+      else if(p2 < 0)                nums1[k--] = nums1[p1--];
+      else if(nums1[p1] < nums2[p2]) nums1[k--] = nums2[p2--];
+      else                           nums1[k--] = nums1[p1--];
+  }
+  return nums1;
+};
 
 // 【颜色分类】
 const nums3 = [2,0,2,1,1,2] // 输出：[0,0,1,1,2,2] 解释：前面存0，中间存1，后面存2
 /**
+ * 注意：交换的时候是cur和 left+1 或 right-1 交换
+ * ---------------------------------------
  * 是2：让当前不是2， 交换right, 并--
  * 是0：让0在1前面，  交换left , 并++，自己也走: 
  * 是1：自己正常走

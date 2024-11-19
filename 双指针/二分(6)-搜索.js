@@ -1,15 +1,24 @@
 /**
  * 搜索
  * ----------------------------------------------------------------------------------------------------------
- * 1. 寻找指定位置-普通数组
- * 2. 寻找插入位置
- * 3. 寻找指定值-矩阵
- * 4. 寻找指定值-有序矩阵
- * 5. 寻找指定位置-旋转排序数组
- * 6. 寻找最小值-旋转排序数组
- * ----------------------------------------------------------------------------------------------------------*/
-
-
+ * 1. 寻找指定位置-普通数组-------------经典二分（3区间）
+ * 2. 寻找插入位置---------------------最终的left就是要插的位置
+ * 3. 寻找指定值-矩阵------------------对每一行二分
+ * 4. 寻找指定值-有序矩阵--------------从右上角 往 左下角找
+ * 5. 寻找指定位置-旋转排序数组---------经典二分（5区间）
+ * 6. 寻找最小值-旋转排序数组----------[HARD]
+ * ----------------------------------------------------------------------------------------------------------
+ *   while (left <= right) {
+ *    let mid = Math.floor((left + right) / 2)
+ *      if (arr[mid] == target)     return mid
+ *      else if (arr[mid] < target) left = mid + 1
+ *      else                       right = mid - 1; 
+ *   }
+ * --------------------------------------------------------------------------------------------------------
+ * 注意！
+ * 
+ * while循环是 left <= right
+ * --------------------------------------------------------------------------------------------------------*/
 // 【寻找指定位置-普通数组】
 /**
  * |    <           arr[mid]       <         |
@@ -57,7 +66,7 @@ function searchMatrix1(matrix, target) {
   const rows = matrix.length , cols = matrix[0].length
   let i = 0, j = cols - 1
   
-  while (i < rows && j >= 0) { // 左下角开始， 往右上角找
+  while (i < rows && j >= 0) { // 右上角开始， 往左下角找
     if (matrix[i][j] === target) return true
     else if (matrix[i][j] > target)  j--
     else  i++
@@ -67,9 +76,13 @@ function searchMatrix1(matrix, target) {
 
 // 【寻找指定位置-旋转排序数组】
 /**
- * |     <      arr[left]        <         arr[mid]           <        arr[right]   <        |
- *  left=mid+1            right=mid-1     return mid      left=mid+1              right=mid-1
+ * 3中情况
+ * 1. nums[mid] == target
+ * 2. nums[left] <= nums[mid] :  nums[left] <= target < nums[mid]   
+ * 3. else                    :  nums[mid] < target <= nums[right]   
  */
+console.log(search([5,1,3], 3))
+
 function search(nums, target) {
   if (!nums.length) return -1
   let left = 0, right = nums.length - 1, mid

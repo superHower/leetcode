@@ -3,7 +3,7 @@
  * ----------------------------------------------------------------------------------------------------------
  * 1. 无重复的最长子串             const s = "wspwwkew"   // 3 解释: 子串是 "wke"，长度为 3。注意，"pwke" 是子序列，不是子串。
  * 2. 找字符串的 所有 字母异位词   const s1 = "cbaebabacd", p = "abc"  // [0,6]  解释: "abc" 的异位词： 0处 的"cba" |  6处 的"bac"
- * 3. 最小覆盖 子串               const s2 = "ADOBECODEBANC", t = "ABC" // "BANC" 解释：最小覆盖子串 "BANC" 包含来自字符串 t 的 'A'、'B' 和 'C'。
+ * 3. 最小覆盖 子串 [HARD]         const s2 = "ADOBECODEBANC", t = "ABC" // "BANC" 解释：最小覆盖子串 "BANC" 包含来自字符串 t 的 'A'、'B' 和 'C'。
  *-----------------------------------------------------------------------------------------------------------
  *    for (let right = 0; right < s.length; right++) {
  *      while ( s[right]怎么怎么样 )) {
@@ -56,8 +56,7 @@ function findAnagrams(s, p) {
         let r = cIndex(s[right])
         cnt[r]--; // 右端点字母 进入窗口
         while (cnt[r] < 0) { // 第二次碰见字母r 或者 r不是p中的字母
-            cnt[cIndex(s[left])]++; // 左端点字母l 离开窗口 --> 移动到右端点后面
-            left++;
+            cnt[cIndex(s[left++])]++; // 左端点字母l 离开窗口 --> 移动到右端点后面
         }
         if (right - left + 1 === p.length) { // s' 和 p 的每种字母的出现次数都相同
             ans.push(left); // s' 左端点下标加入答案
@@ -71,23 +70,10 @@ function findAnagrams(s, p) {
     }
 };
 
-// 【最小覆盖 子串】
+// 【最小覆盖 子串】（hard）
 
 const s2 = "ADOBECODEBANC", t = "ABC" // "BANC" 解释：最小覆盖子串 "BANC" 包含来自字符串 t 的 'A'、'B' 和 'C'。
 // const s = "a", t = "aa"              // "" 解释: t 中两个字符 'a' 均应包含在 s 的子串中, 无最小覆盖字串
-function isCovered(cntS, cntT) {
-  for (let i = 'A'.charCodeAt(0); i <= 'Z'.charCodeAt(0); i++) {
-      if (cntS[i] < cntT[i]) {
-          return false;
-      }
-  }
-  for (let i = 'a'.charCodeAt(0); i <= 'z'.charCodeAt(0); i++) {
-      if (cntS[i] < cntT[i]) {
-          return false;
-      }
-  }
-  return true;
-}
 
 function minWindow(s, t) {
   const m = s.length;
@@ -111,6 +97,20 @@ function minWindow(s, t) {
       }
   }
   return ansLeft < 0 ? "" : s.substring(ansLeft, ansRight + 1);
+
+  function isCovered(cntS, cntT) {
+    for (let i = 'A'.charCodeAt(0); i <= 'Z'.charCodeAt(0); i++) {
+        if (cntS[i] < cntT[i]) {
+            return false;
+        }
+    }
+    for (let i = 'a'.charCodeAt(0); i <= 'z'.charCodeAt(0); i++) {
+        if (cntS[i] < cntT[i]) {
+            return false;
+        }
+    }
+    return true;
+  }
 };
 
 
