@@ -37,7 +37,7 @@ const nums2 = [1,2,0,0,3,-1,4,6], target = 3   // 7  解释：有7种子数组
  * map中记录某前缀和的次数
  * 
  */
-console.log("输出", subarraySum(nums2, target) )
+console.log("输出", subarraySum(nums有2, target) )
 function subarraySum(nums, target) {
   const map = new Map(); // 存储{ 前缀和: 次数 }
   map.set(0, 1);
