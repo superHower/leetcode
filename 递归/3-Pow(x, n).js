@@ -22,14 +22,10 @@ function myPow(x, n) {
 
 function myPow1(x, n) {
   console.log(x, n)
-  if(n ==0 || n ==1) 
-      return n ==0 ? 1: x
-  else if(n < 0)
-      return myPow(1/x, Math.abs(n))
+  if(n ==0 || n ==1) return n ==0 ? 1: x
+  else if(n < 0)     return myPow(1/x, Math.abs(n))
   else{
-      if(n % 2 == 0) 
-        return myPow(x * x , n/2)
-      else 
-        return myPow(x * x ,Math.floor(n/2))* x
+      if(n % 2 == 0) return myPow(x * x , n/2)
+      else           return myPow(x * x ,Math.floor(n/2))* x
   }
 };

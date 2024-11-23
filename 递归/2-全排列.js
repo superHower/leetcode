@@ -1,5 +1,8 @@
 const nums = [1,2,3] // 输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
-console.log(permute(nums))
+/**
+ * used的作用就是：保证重复的不放进去。
+ * 注意：对于used[n] 一定要continue, 不然排列出来的就有很多重复的
+ */
 
 function permute(nums) {
   let path = [], res = []
